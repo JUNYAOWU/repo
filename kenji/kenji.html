@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="Zn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
+            color: white;
+        }
+        
+        header {
+            background: linear-gradient(90deg, #ff6f91, #ff9671);
+            padding: 20px 20px;
+            text-align: center;
+            color: white;
+            font-size: 2.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .newspaper-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 20px auto;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .newspaper-section img {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .newspaper-section p {
+            font-size: 1.2rem;
+            text-align: center;
+            margin-top: 20px;
+            color: #ff6f91;
+        }
+        .letter-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 20px auto;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .letter-content {
+            text-align: left;
+            color: white;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .letter-content h2 {
+            color: #ff6f91;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .letter-content p {
+            margin: 15px 0;
+            color: #e0e0e0;
+        }
+
+        section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px 100px;
+        }
+        
+        .memory-card {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            margin: 20px 0;
+            overflow: hidden;
+            width: 90%;
+            max-width: 800px;
+            color: black;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease, transform 1s ease, box-shadow 0.3s ease;
+        }
+        
+        .memory-card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            transform: translateY(-5px);
+        }
+        
+        .memory-card:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        .memory-card img {
+            width: 50%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .memory-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .memory-card .content {
+            padding: 20px;
+            width: 50%;
+        }
+        
+        .memory-card .content h3 {
+            margin: 15px 0;
+            color: #ff6f91;
+            font-size: 1.5rem;
+        }
+        
+        .memory-card .content p {
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        
+        .horizontal-scroll-container {
+            display: flex;
+            overflow-x: auto;
+            width: 50%;
+            scroll-snap-type: x mandatory;
+            border-radius: 10px;
+        }
+        
+        .horizontal-scroll-container img {
+            flex: 0 0 auto;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            scroll-snap-align: start;
+            border-radius: 10px;
+        }
+        
+        footer {
+            background: linear-gradient(90deg, #ff6f91, #ff9671);
+            color: white;
+            text-align: center;
+            padding: 1px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            font-size: 1rem;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .emoji {
+            position: absolute;
+            font-size: 4rem;
+            color: #ff6f91;
+            animation: drop 8s infinite ease-in-out;
+            cursor: pointer;
+        }
+        
+        @keyframes drop {
+            0% {
+                transform: translateY(-100vh);
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+        
+        .playlist-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .playlist-container iframe {
+            border: none;
+            border-radius: 10px 0 0 10px;
+        }
+        
+        .playlist-container button {
+            background: #ff6f91;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+        
+        .playlist-container button:hover {
+            background: #ff9671;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Happy Birthday, Kenji!</h1>
+    </header>
+
+    <!-- 报纸部分 -->
+    <div class="newspaper-section">
+        <img src="https://www.gmw.cn/01gmrb/2005-01/26/A1_b.gif" alt="Kenji's Birthday Newspaper">
+        <p>这是 Kenji 生日当天的报纸，记录了出生那天的世界大事。</p>
+    </div>
+
+    <!-- Emoji Animation -->
+    <div class="emoji">🎈</div>
+    <div class="emoji">🎈</div>
+    <div class="emoji">🎂</div>
+    <div class="emoji">🎈</div>
+    <div class="emoji">🎂</div>
+
+    <div class="letter-section">
+        <div class="letter-content">
+            <h2>Dear Kenji,</h2>
+            <p>
+                生日快乐！🎉🎂<br>
+            </p>
+            <p>
+                首先，希望你永远不要水逆！🌟 无论遇到什么困难，都能轻松化解，顺顺利利。生活总是充满惊喜和挑战，但我相信你一定能以乐观的心态面对一切。
+            </p>
+            <p>
+                其次，希望你每天都开开心心！😊 尽早当上熟睡的老公~
+            </p>
+            <p>
+                最后，希望我们能玩得越来越好！🎮❤️ 
+                从相识的那一刻起，直到现在（从 2021 年 10 月 6 日至今已有 <span id="days-counter">0</span>），我们一起分享了无数快乐，也共同面对了不少烦恼。
+                无论是现在还是未来，都能一起分享快乐、分担烦恼。和你在一起的每一刻，都是我最珍贵的回忆。期待我们未来有更多的故事，更多的笑声，更多的冒险！
+            </p>
+            <p>
+                愿你在新的一岁里，心想事成，万事如意！🎁<br>
+                无论未来如何，我都会一直支持你、陪伴你。
+            </p>
+            <p>
+                祝你生日快乐，天天开心！🥳<br>
+                —— 来自 yao 的祝福
+            </p>
+        </div>
+        </div>
+
+    <section>
+        <!-- Memory Cards -->
+        <div class="memory-card">
+            <img src="memory1.jpg" alt="Memory 1">
+            <div class="content">
+                <h3>我们的第一次见面</h3>
+                <p>那是一个特别的日子，我们第一次见面，彼此分享了许多快乐hhhhhhhhhhhhhhh</p>
+            </div>
+        </div>
+
+        <div class="memory-card">
+            <img src="memory2.jpg" alt="Memory 2">
+            <div class="content">
+                <h3>宵夜篇</h3>
+                <p>难忘的肠粉，饱死了</p>
+            </div>
+        </div>
+
+        <div class="memory-card">
+            <img src="memory3.jpg" alt="Memory 3">
+            <div class="content">
+                <h3>不一样的时刻</h3>
+                <p>谁拍照会捂着腋下拍啊🤣</p>
+            </div>
+        </div>
+
+        <!-- 添加更多卡片以触发滚动 -->
+        <div class="memory-card">
+            <img src="memory4.jpg" alt="Memory 4">
+            <div class="content">
+                <h3>美好的时光</h3>
+                <p>我们一起度过的每一个瞬间，都是最珍贵的回忆。</p>
+            </div>
+        </div>
+
+        <div class="memory-card">
+            <img src="memory5.jpg" alt="Memory 5">
+            <div class="content">
+                <h3>特别的生日</h3>
+                <p>我们一起过的第一个生日，谢谢你送的嘟嘟喵</p>
+            </div>
+        </div>
+
+        <div class="memory-card">
+            <img src="memory6.jpg" alt="Memory 6">
+            <div class="content">
+                <h3>见证你的许愿</h3>
+                <p>Happy Birthday To You</p>
+            </div>
+        </div>
+
+        <div class="memory-card">
+            <img src="memory7.jpg" alt="Memory 7">
+            <div class="content">
+                <h3>特殊的角度</h3>
+                <p>这个角度的第一张</p>
+            </div>
+        </div>
+
+        <div class="memory-card">
+            <div class="horizontal-scroll-container">
+                <img src="memory8.png" alt="Memory 8">
+                <img src="memory13.jpg" alt="Memory 13">
+            </div>
+            <div class="content">
+                <h3>我的又一次生日</h3>
+                <p>每年的这一天，都是我最珍贵的回忆。</p>
+            </div>
+        </div>
+
+        <div class="memory-card">
+            <img src="memory9.jpg" alt="Memory 9">
+            <div class="content">
+                <h3>早起的一天</h3>
+                <p>我们上大学前吃的最后一次早茶/(ㄒoㄒ)/~~</p>
+            </div>
+        </div>
+
+        <div class="memory-card">
+            <img src="memory10.jpg" alt="Memory 10">
+            <div class="content">
+                <h3>偷偷准备的惊喜</h3>
+                <p>瞒着李菲准备的生日蛋糕</p>
+            </div>
+        </div>
+
+        <div class="memory-card">
+            <img src="memory11.jpg" alt="Memory 11">
+            <div class="content">
+                <h3>一年前你的生日</h3>
+                <p>给你送了个相框</p>
+            </div>
+        </div>
+
+        <div class="memory-card">
+            <img src="memory12.jpg" alt="Memory 12">
+            <div class="content">
+                <h3>今年的生日</h3>
+                <p>希望你喜欢哼呀宁(❁´◡`❁)</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Made with ❤️ by yao</p>
+    </footer>
+
+    <!-- 歌单切换按钮和 iframe -->
+    <div class="playlist-container">
+        <iframe id="music-iframe" frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" 
+                src="//music.163.com/outchain/player?type=2&id=2166370581&auto=1&height=66">
+        </iframe>
+        <button onclick="nextPlaylist()">下一首</button>
+    </div>
+
+    <script>
+        // 页面滚动时触发卡片动画
+        const memoryCards = document.querySelectorAll('.memory-card');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.5 });
+
+        memoryCards.forEach(card => {
+            observer.observe(card);
+        });
+
+        // 歌单列表
+        const playlists = [
+            '2166370581', // 歌单 1
+            '2668576473', // 歌单 2
+            '2602759962', // 歌单 3
+        ];
+        let currentPlaylistIndex = 0;
+
+        // 切换到下一个歌单
+        function nextPlaylist() {
+            currentPlaylistIndex = (currentPlaylistIndex + 1) % playlists.length;
+            const iframe = document.getElementById('music-iframe');
+            iframe.src = `//music.163.com/outchain/player?type=2&id=${playlists[currentPlaylistIndex]}&auto=1&height=66`;
+        }
+        
+        // 计算从 2021 年 10 月 6 日至今的时间差
+        function updateTimeDiff() {
+            const startDate = new Date('2021-10-06T00:00:00');
+            const currentDate = new Date();
+            const timeDiff = currentDate - startDate;
+        
+            const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+            const hoursDiff = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutesDiff = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+            const secondsDiff = Math.floor((timeDiff % (1000 * 60)) / 1000);
+        
+            document.getElementById('days-counter').textContent = 
+                `${daysDiff} 天 ${hoursDiff} 小时 ${minutesDiff} 分钟 ${secondsDiff} 秒`;
+        }
+        
+        // 初始调用
+        updateTimeDiff();
+        
+        // 每秒更新一次
+        setInterval(updateTimeDiff, 1000);
+    </script>
+</body>
+</html>
